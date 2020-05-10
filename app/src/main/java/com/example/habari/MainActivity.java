@@ -27,11 +27,15 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tab_layout);
         viewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager(), 0);
 
-        viewPagerAdapter.addFragment(new DialFragment(), "Dial");
-        viewPagerAdapter.addFragment(new ContactsFragment(), "Contacts");
+        viewPagerAdapter.addFragment(new DialFragment(), ""); //Dial Fragment
+        viewPagerAdapter.addFragment(new ContactsFragment(), ""); //Contacts Fragment
 
         mainViewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(mainViewPager);
+
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_dialpad);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_person);
         setSupportActionBar(toolbar);
+
     }
 }
