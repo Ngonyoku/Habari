@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import com.example.habari.R;
 
 import java.security.Permission;
+import java.util.Objects;
 
 public class DialFragment extends Fragment implements View.OnClickListener {
     private View view;
@@ -51,6 +52,7 @@ public class DialFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.nine).setOnClickListener(this);
         view.findViewById(R.id.zero).setOnClickListener(this);
         view.findViewById(R.id.star).setOnClickListener(this);
+        view.findViewById(R.id.dial_call).setOnClickListener(this);
         view.findViewById(R.id.hash).setOnClickListener(this);
         view.findViewById(R.id.dial_erase).setOnClickListener(this);
         view.findViewById(R.id.dial_options).setOnClickListener(this);
@@ -99,14 +101,7 @@ public class DialFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.dial_call:
                 String number = display.getText().toString();
-                if (number.trim().length() > 0) {
-                    if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE)
-                            != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CALL_PHONE}, 2);
-                    } else {
-                        startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + display.getText().toString())));
-                    }
-                }
+                runCall(number);
                 break;
             case R.id.dial_erase:
                 display.setText(display.getText().subSequence(0, display.getText().length() - 1));
@@ -114,6 +109,30 @@ public class DialFragment extends Fragment implements View.OnClickListener {
             case R.id.dial_options:
 
                 break;
+        }
+    }
+
+    public void runCall(String number) {
+        if (number.trim().length() > 0) {
+            //First Check if the App has permissions to Call Phone.
+            if (ContextCompat.checkSelfPermission(Objects.requireNonNull(getContext()), Manifest.permission.CALL_PHONE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                //...if Not, Request Permission from the User.
+                ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), new String[]{Manifest.permission.CALL_PHONE}, 2);
+            } else {
+                //Check if the value Entered is Ussd.
+                if (number.startsWith("*") && number.endsWith("#")) {
+                    number = number.substring(0, number.length() - 1); //We eliminate the last hash(#) in the value.
+                    String ussdCode = number + Uri.encode("#"); //We encode our own hash(#) onto the value
+                    startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + ussdCode))); //We run the USSD code.
+                } else {
+                    //We call the Number
+                    startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + display.getText().toString())));
+                }
+
+            }
+        } else {
+            Toast.makeText(getContext(), "Enter Phone Number", Toast.LENGTH_SHORT).show();
         }
     }
 }
