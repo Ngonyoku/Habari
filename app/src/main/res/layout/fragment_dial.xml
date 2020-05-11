@@ -13,21 +13,25 @@
         android:weightSum="3">
 
         <ImageButton
+            android:id="@+id/dial_options"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:src="@drawable/ic_more" />
 
-
         <TextView
+            android:id="@+id/dial_display"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2.2"
             android:gravity="center"
-            android:textColor="@color/colorPrimaryDark" />
+            android:maxLines="1"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp" />
 
         <ImageButton
+            android:id="@+id/dial_erase"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -52,6 +56,7 @@
             android:weightSum="3">
 
             <Button
+                android:id="@+id/one"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -62,6 +67,7 @@
                 android:textSize="24sp" />
 
             <Button
+                android:id="@+id/two"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -72,6 +78,7 @@
                 android:textSize="24sp" />
 
             <Button
+                android:id="@+id/three"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -90,6 +97,7 @@
             android:weightSum="3">
 
             <Button
+                android:id="@+id/four"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -100,6 +108,7 @@
                 android:textSize="24sp" />
 
             <Button
+                android:id="@+id/five"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -110,6 +119,7 @@
                 android:textSize="24sp" />
 
             <Button
+                android:id="@+id/six"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -129,6 +139,7 @@
             android:weightSum="3">
 
             <Button
+                android:id="@+id/seven"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -139,6 +150,7 @@
                 android:textSize="24sp" />
 
             <Button
+                android:id="@+id/eight"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -149,6 +161,7 @@
                 android:textSize="24sp" />
 
             <Button
+                android:id="@+id/nine"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -168,6 +181,7 @@
             android:weightSum="3">
 
             <Button
+                android:id="@+id/star"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -178,6 +192,7 @@
                 android:textSize="24sp" />
 
             <Button
+                android:id="@+id/zero"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -188,6 +203,7 @@
                 android:textSize="24sp" />
 
             <Button
+                android:id="@+id/hash"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -207,6 +223,7 @@
             android:weightSum="3">
 
             <ImageButton
+                android:id="@+id/dial_call"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -214,6 +231,5 @@
                 android:background="@drawable/dial_background"
                 android:src="@drawable/ic_call" />
         </LinearLayout>
-
     </LinearLayout>
 </LinearLayout>

@@ -1,24 +1,119 @@
 package com.example.habari.Fragments;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.habari.R;
 
-public class DialFragment extends Fragment {
+import java.security.Permission;
+
+public class DialFragment extends Fragment implements View.OnClickListener {
+    private View view;
+    private TextView display;
+
     public DialFragment() {
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_dial, container, false);
+        view = inflater.inflate(R.layout.fragment_dial, container, false);
+        display = view.findViewById(R.id.dial_display);
+        dialPad(view);
         return view;
+    }
+
+    private void dialPad(View view) {
+        view.findViewById(R.id.one).setOnClickListener(this);
+        view.findViewById(R.id.two).setOnClickListener(this);
+        view.findViewById(R.id.three).setOnClickListener(this);
+        view.findViewById(R.id.four).setOnClickListener(this);
+        view.findViewById(R.id.five).setOnClickListener(this);
+        view.findViewById(R.id.six).setOnClickListener(this);
+        view.findViewById(R.id.seven).setOnClickListener(this);
+        view.findViewById(R.id.eight).setOnClickListener(this);
+        view.findViewById(R.id.nine).setOnClickListener(this);
+        view.findViewById(R.id.zero).setOnClickListener(this);
+        view.findViewById(R.id.star).setOnClickListener(this);
+        view.findViewById(R.id.hash).setOnClickListener(this);
+        view.findViewById(R.id.dial_erase).setOnClickListener(this);
+        view.findViewById(R.id.dial_options).setOnClickListener(this);
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.one:
+                display.setText(display.getText() + "1");
+                break;
+            case R.id.two:
+                display.setText(display.getText() + "2");
+                break;
+            case R.id.three:
+                display.setText(display.getText() + "3");
+                break;
+            case R.id.four:
+                display.setText(display.getText() + "4");
+                break;
+            case R.id.five:
+                display.setText(display.getText() + "5");
+                break;
+            case R.id.six:
+                display.setText(display.getText() + "6");
+                break;
+            case R.id.seven:
+                display.setText(display.getText() + "7");
+                break;
+            case R.id.eight:
+                display.setText(display.getText() + "8");
+                break;
+            case R.id.nine:
+                display.setText(display.getText() + "9");
+                break;
+            case R.id.zero:
+                display.setText(display.getText() + "0");
+                break;
+            case R.id.star:
+                display.setText(display.getText() + "*");
+                break;
+            case R.id.hash:
+                display.setText(display.getText() + "#");
+                break;
+            case R.id.dial_call:
+                String number = display.getText().toString();
+                if (number.trim().length() > 0) {
+                    if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE)
+                            != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CALL_PHONE}, 2);
+                    } else {
+                        startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + display.getText().toString())));
+                    }
+                }
+                break;
+            case R.id.dial_erase:
+                display.setText(display.getText().subSequence(0, display.getText().length() - 1));
+                break;
+            case R.id.dial_options:
+
+                break;
+        }
     }
 }
