@@ -104,7 +104,10 @@ public class DialFragment extends Fragment implements View.OnClickListener {
                 runCall(number);
                 break;
             case R.id.dial_erase:
-                display.setText(display.getText().subSequence(0, display.getText().length() - 1));
+                if (!display.getText().toString().equals("")) {
+                    display.setText(display.getText().subSequence(0, display.getText().length() - 1));
+                }
+
                 break;
             case R.id.dial_options:
 
