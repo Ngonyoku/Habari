@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Habari</string>
     <string name="Exit">Exit</string>
-    <string name="contact_name">Name</string>
+    <string name="contact_name">Contact Name</string>
     <string name="contact_phone">Phone Number</string>
+    <string name="call">CALL</string>
 </resources>

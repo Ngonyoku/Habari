@@ -36,6 +36,17 @@ public class DialFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_dial, container, false);
         display = view.findViewById(R.id.dial_display);
+
+        view.findViewById(R.id.dial_erase).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (!display.getText().toString().equals("")) {
+                    display.setText(null);
+                }
+
+                return true;
+            }
+        });
         dialPad(view);
         return view;
     }
