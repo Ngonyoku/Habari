@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.habari.R;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.security.Permission;
 import java.util.Objects;
@@ -112,7 +113,7 @@ public class DialFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.dial_call:
                 String number = display.getText().toString();
-                runCall(number);
+                runCall(v, number);
                 break;
             case R.id.dial_erase:
                 if (!display.getText().toString().equals("")) {
@@ -121,12 +122,12 @@ public class DialFragment extends Fragment implements View.OnClickListener {
 
                 break;
             case R.id.dial_options:
-
+                Snackbar.make(v, "Feature Not Yet Implemented!", Snackbar.LENGTH_LONG).show();
                 break;
         }
     }
 
-    public void runCall(String number) {
+    public void runCall(View view, String number) {
         if (number.trim().length() > 0) {
             //First Check if the App has permissions to Call Phone.
             if (ContextCompat.checkSelfPermission(Objects.requireNonNull(getContext()), Manifest.permission.CALL_PHONE)
@@ -146,7 +147,14 @@ public class DialFragment extends Fragment implements View.OnClickListener {
 
             }
         } else {
-            Toast.makeText(getContext(), "Enter Phone Number", Toast.LENGTH_SHORT).show();
+            Snackbar toast = Snackbar.make(view, "Please Enter Phone Number", Snackbar.LENGTH_LONG);
+            toast.setAction("OK", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+            toast.show();
         }
     }
 }
